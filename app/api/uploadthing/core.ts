@@ -1,5 +1,4 @@
 import { createUploadthing, type FileRouter } from "uploadthing/next";
-import { UploadThingError } from "uploadthing/server";
 import { currentUser } from "@clerk/nextjs/server";
 
 const f = createUploadthing();
@@ -18,7 +17,7 @@ export const ourFileRouter = {
       const user = await getUser();
  
       // If you throw, the user will not be able to upload
-      if (!user) throw new UploadThingError("Unauthorized");
+      if (!user) throw new Error("Unauthorized");
  
       // Whatever is returned here is accessible in onUploadComplete as `metadata`
       return { userId: user.id };
